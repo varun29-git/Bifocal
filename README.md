@@ -1,90 +1,80 @@
-# Bifocal Research Autonomy Framework
+# Research Autonomy Framework
 
 Experimental Research Framework (V0.1-alpha)
 
-Bifocal is a small research scaffold for AI-integrated IDEs. It separates quick observation from slower synthesis so an agent can work with sources without turning the first coherent summary into a conclusion.
+This repository is a modular research structure for AI-integrated IDEs. It helps an agent turn a static directory into an active research environment by separating fast observation from deliberate synthesis.
 
-The framework borrows the System 1 and System 2 labels from Daniel Kahneman's *Thinking, Fast and Slow*. In this repository, those labels are practical research modes. They are not claims that agents think like humans.
+The framework adapts the dual-process model popularized in Daniel Kahneman's *Thinking, Fast and Slow*. In this repository, the model is used as an operational protocol, not as a claim that software agents think like humans.
 
-## What It Provides
+## Purpose
 
-- `source_material/` for raw inputs.
-- `processed_wiki/` for short System 1 observations.
-- `synthesis/` for System 2 knowledge blocks.
-- `research_radar.md` for active questions and synthesis status.
-- `failure_log.md` for one-line records of caught reasoning drift.
-- `.agent/protocol.md` for operating instructions and project memory.
+The framework gives an AI agent a simple research loop:
 
-The structure is intentionally light. It asks the agent to do a few things consistently rather than many things ceremonially.
+1. Observe incoming material quickly.
+2. Extract high-signal notes and gaps.
+3. Track recurring questions in a shared radar.
+4. Switch to slower synthesis only when the evidence base is ready.
+5. Produce standalone knowledge blocks with backing evidence.
+
+This structure is intended for research work where traceability matters. It keeps raw material, observations, and verified synthesis in separate places so the user can inspect how conclusions formed.
 
 ## Core Model
 
-System 1 is observation. It is fast, low-latency, and useful for spotting high-signal facts, gaps, contradictions, and possible questions.
+System 1 is the observation layer. It is fast, low-latency, and pattern-oriented. Its job is to identify high-signal information, contradictions, missing context, and candidate questions.
 
-System 2 is synthesis. It is slower and evidence-backed. It compares sources, checks assumptions, and writes a standalone answer only when the question is ready or the user asks for it.
+System 2 is the synthesis layer. It is slower, evidence-backed, and deliberate. Its job is to build verified knowledge blocks from multiple independent observations.
 
-Every important claim should still be broken down from first principles:
-
-1. What is the source?
-2. What was observed?
-3. What was inferred?
-4. What assumption is doing work?
-5. What would change the conclusion?
+Both layers must work from first principles. The agent should deconstruct every claim into its source, mechanism, assumption, and implication before treating it as useful knowledge.
 
 ## Repository Structure
 
 ```plaintext
 /
 |-- .agent/
-|   `-- protocol.md
+|   |-- protocol.md
+|   `-- project_memory.md
 |-- source_material/
 |-- processed_wiki/
 |-- synthesis/
 |-- research_radar.md
-|-- failure_log.md
 |-- init.sh
 `-- README.md
 ```
 
 ## How to Use
 
-1. Put raw notes, PDFs, transcripts, exports, or copied source text in `source_material/`.
-2. Point Cursor, Windsurf, or another AI IDE agent to `.agent/protocol.md`.
-3. Ask the agent to start in System 1.
-4. Review `research_radar.md` to see open questions and which ones are ready for synthesis.
-5. Ask for System 2 when you want a standalone synthesis, or let the agent suggest it when enough independent support exists.
-6. Review `failure_log.md` periodically to see whether the protocol is catching substitution, anchoring, or WYSIATI risk in practice.
+1. Place raw notes, PDFs, transcripts, exports, or copied source text in `source_material/`.
+2. Point your AI IDE agent, such as Cursor or Antigravity, to `.agent/protocol.md`.
+3. Ask the agent to follow the protocol before reading or modifying research files.
+4. Let the agent run System 1 passes into `processed_wiki/`.
+5. Review `research_radar.md` as the active index of questions and synthesis readiness.
+6. Trigger System 2 manually, or allow it when the protocol criteria are met.
 
-Suggested IDE instruction:
+Suggested agent instruction:
 
 ```text
-Use .agent/protocol.md as your operating protocol and project memory. Start in System 1. Keep research_radar.md current. Only synthesize when the trigger is met or I ask for System 2.
+Use .agent/protocol.md as your operating protocol for this repository. Start in System 1 unless I explicitly ask for System 2. Keep research_radar.md current.
 ```
 
-## Design Principles
+## Operating Rules
 
-- Keep raw inputs, observations, and conclusions separate.
-- Prefer short useful notes over elaborate compliance.
-- Treat source count as a readiness signal, not proof.
-- Check source independence by asking what each source adds that the others do not.
-- Keep memory in the protocol so the agent has one canonical instruction file.
-- Use humble, grounded language.
-- Do not use em dash characters.
+- Raw source material belongs in `source_material/`.
+- System 1 summaries belong in `processed_wiki/`.
+- System 2 synthesis files belong in `synthesis/`.
+- Every synthesis file must include a Backing Evidence section.
+- Every System 2 claim must be checked against `.agent/project_memory.md`.
+- Contradictions against project memory require a Falsification Review.
 
 ## Initialization
 
-Run:
+Run the initializer from any directory:
 
 ```bash
 ./init.sh
 ```
 
-By default, the initializer writes the framework into the current directory. You can also pass a target directory:
-
-```bash
-./init.sh path/to/project
-```
+If you run it outside a directory named `research-autonomy-framework`, it creates that directory. If you run it inside the repository, it refreshes the framework files in place.
 
 ## Status
 
-This is V0.1-alpha. It is suitable for experimentation and iteration, not for unattended high-stakes research.
+This is V0.1-alpha. The structure is intentionally small and inspectable. It is ready for experimentation, but it should be adapted carefully before use in high-stakes research.
