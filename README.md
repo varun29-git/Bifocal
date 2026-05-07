@@ -17,7 +17,7 @@ The framework gives an AI agent a simple research loop:
 5. Switch to slower synthesis only when the evidence base is ready.
 6. Produce standalone knowledge blocks with backing evidence.
 
-This structure is intended for research work where traceability matters. It keeps raw material, quick_notes, and verified deep insights in separate places so the user can inspect how conclusions formed.
+This structure is intended for research work where traceability matters. It keeps raw material, quick notes, and verified deep insights in separate places so the user can inspect how conclusions formed.
 
 Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
@@ -75,7 +75,7 @@ Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources,
 - System 1 summaries belong in `quick_notes/`.
 - Durable concept pages belong in `my_wikipedia/`.
 - Questions, gaps, contradictions, and deep insight candidates belong in `radar.md`.
-- System 2 deep deep insight files belong in `deep_insights/`.
+- System 2 deep insight files belong in `deep_insights/`.
 - Every deep insight file must include a Backing Evidence section.
 - Every System 2 claim must be checked against Protocol Memory in `.agent/protocol.md`.
 - Contradictions against Protocol Memory require a clear Memory Check.

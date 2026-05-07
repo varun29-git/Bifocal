@@ -24,7 +24,7 @@ The framework can use System 1 and System 2 as familiar labels, but the product 
 
 - `sources/` for raw inputs.
 - `my_questions.txt` for optional plain-language questions from the user.
-- `quick_notes/` for short System 1 quick_notes.
+- `quick_notes/` for short System 1 quick notes.
 - `my_wikipedia/` for durable concept pages that accumulate across sources.
 - `deep_insights/` for System 2 knowledge blocks.
 - `radar.md` for questions, gaps, contradictions, concept clusters, and deep insight candidates.
