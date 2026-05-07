@@ -269,3 +269,34 @@ Before ending a research turn, verify:
 5. Questions were not invented just to make the radar look active.
 6. Any caught reasoning drift was logged in `mistakes.md`.
 7. No em dash characters were introduced.
+
+## Run Summary
+
+At the end of every research turn, update `run_summary.md`.
+
+Use this structure:
+
+```markdown
+# Run Summary
+
+Last Run: {YYYY-MM-DD}
+Mode: Near Lens | Far Lens
+
+## Updated
+
+- {artifact path}
+
+## Ready for Far Lens
+
+- {radar item or question}
+
+## Blocked or Missing
+
+- {missing source, unresolved gap, or none}
+
+## Next Action
+
+{one concrete next action}
+```
+
+If anything is ready for Far Lens but no deep insight was written, state that explicitly in `Ready for Far Lens`.

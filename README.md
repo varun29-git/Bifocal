@@ -46,6 +46,7 @@ Before System 1 extracts claims, it performs a lightweight source triage: source
 |-- deep_insights/
 |-- examples/
 |-- radar.md
+|-- run_summary.md
 |-- mistakes.md
 |-- init.sh
 `-- README.md
@@ -76,6 +77,7 @@ Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources,
 - System 1 summaries belong in `quick_notes/`.
 - Durable concept pages belong in `my_wikipedia/`.
 - Questions, gaps, contradictions, and deep insight candidates belong in `radar.md`.
+- End-of-turn readiness and next action belong in `run_summary.md`.
 - System 2 deep insight files belong in `deep_insights/`.
 - Every deep insight file must include a Backing Evidence section.
 - Every System 2 claim must be checked against Protocol Memory in `.agent/protocol.md`.
