@@ -1,44 +1,25 @@
-# Bifocal Research Autonomy Framework
+# Bifocal
 
-Experimental Research Framework (V0.2-alpha)
+An agentic research framework inspired by Kahneman's fast and slow thinking.
 
-Bifocal is an agentic research framework inspired by Daniel Kahneman's distinction between fast and slow thinking. It gives an AI agent a "bifocal glass": one lens for quick observation, and one lens for deeper synthesis. The point is not to make the agent only answer inputs with outputs. The point is to help the agent shift between fast reading and careful reasoning while keeping an evidence trail the user can inspect.
+Bifocal gives an AI agent a pair of research lenses: one for fast observation, one for deeper synthesis. Instead of treating the agent as a simple input-output machine, Bifocal gives it a way to read messy sources, build memory, notice gaps, and slow down before making claims.
 
-| Lens | Inspired By | What The Agent Does | Where It Writes |
+| Lens | Mode | Job | Writes To |
 | --- | --- | --- | --- |
-| Near Lens | Fast thinking | Triage sources, notice signals, find gaps, mark concepts | `quick_notes/`, `radar.md` |
-| Far Lens | Slow thinking | Compare evidence, test assumptions, write synthesis | `deep_insights/`, `my_wikipedia/` |
+| Near Lens | Fast | Triage, observe, note signals, find gaps | `quick_notes/`, `radar.md` |
+| Far Lens | Slow | Compare sources, test assumptions, synthesize | `deep_insights/`, `my_wikipedia/` |
 
-Bifocal uses System 1 and System 2 as practical labels, not as a claim that AI literally thinks like a human. The useful idea is the workflow: do not turn the first coherent answer into the final conclusion.
+> Bifocal uses System 1 and System 2 as useful labels. It does not claim AI literally thinks like a human. The goal is practical: do not let the first coherent answer become the final answer.
 
-## What Problem It Solves
+## Start Here
 
-Most AI research sessions are too linear:
-
-1. The user asks a question.
-2. The agent answers.
-3. The reasoning trail disappears.
-
-Bifocal makes the agent maintain a small research ecosystem instead:
-
-1. Read sources.
-2. Check source quality.
-3. Write quick observations.
-4. Build a small concept wiki.
-5. Track open questions and contradictions.
-6. Synthesize only when the evidence is ready.
-7. Leave a run summary so the user knows what happened.
-
-This is useful when the user drops in a messy source set: PDFs, preprints, blog posts, Wikipedia pages, notes, and papers of mixed quality. Bifocal gives the agent a simple way to handle that mess without pretending all sources are equally trustworthy.
-
-## Quick Start
-
-1. Put your sources in `sources/`.
-2. Add optional questions to `my_questions.txt`, one per line.
-3. Tell your agent to use `.agent/protocol.md`.
-4. Ask it to "Run Bifocal."
-5. Read `run_summary.md` first.
-6. Then inspect `radar.md`, `my_wikipedia/`, and `deep_insights/`.
+```text
+1. Add sources to sources/
+2. Add optional questions to my_questions.txt
+3. Tell your AI agent to use .agent/protocol.md
+4. Ask it to "Run Bifocal"
+5. Read run_summary.md first
+```
 
 Suggested agent instruction:
 
@@ -46,58 +27,83 @@ Suggested agent instruction:
 Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources, read my_questions.txt as optional steering input, update quick_notes, my_wikipedia, and radar.md as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
 ```
 
-## The Files
+## Why This Exists
 
-| File or Folder | What It Is For |
+Most AI research sessions are too flat.
+
+| Usual AI Flow | Bifocal Flow |
 | --- | --- |
-| `sources/` | Raw PDFs, notes, transcripts, articles, and saved links |
-| `my_questions.txt` | Simple question inbox for the user |
-| `quick_notes/` | Short notes from the Near Lens |
-| `my_wikipedia/` | Reusable concept pages |
+| User asks a question | User gives questions, sources, or both |
+| Agent answers | Agent reads, triages, and builds research memory |
+| Reasoning disappears | Evidence trail stays visible |
+| Everything becomes Q&A | Questions become part of a larger research ecosystem |
+
+Bifocal is for moments when the user drops in mixed sources and expects the agent to behave like a careful researcher:
+
+- PDFs,
+- preprints,
+- blog posts,
+- Wikipedia pages,
+- copied notes,
+- peer-reviewed papers,
+- messy or incomplete source sets.
+
+The framework helps the agent ask: what is trustworthy, what is missing, what is ready, and what should not be synthesized yet?
+
+## What Bifocal Maintains
+
+| Path | Purpose |
+| --- | --- |
+| `sources/` | Raw inputs |
+| `my_questions.txt` | Simple user question inbox |
+| `quick_notes/` | Short Near Lens notes from individual sources |
+| `my_wikipedia/` | Durable concept wiki |
 | `radar.md` | Questions, gaps, contradictions, and synthesis candidates |
-| `deep_insights/` | Slow, evidence-backed synthesis |
-| `run_summary.md` | What changed, what is ready, what is blocked |
-| `mistakes.md` | Reasoning drift the agent caught and corrected |
-| `.agent/protocol.md` | The operating protocol for the agent |
+| `deep_insights/` | Far Lens synthesis |
+| `run_summary.md` | What happened, what is ready, what is blocked |
+| `mistakes.md` | Caught reasoning drift |
+| `.agent/protocol.md` | Agent operating protocol |
 
-## How A Run Works
+## The Research Loop
 
-During a Bifocal run, the agent should:
+The agent runs Bifocal in this order:
 
-1. Read `my_questions.txt`.
-2. Inspect `sources/`.
-3. Triage each useful source.
-4. Write short source notes in `quick_notes/`.
+1. Read the user's questions.
+2. Inspect the source folder.
+3. Triage source quality.
+4. Write quick source notes.
 5. Mark concept candidates.
-6. Promote only important concepts to `my_wikipedia/`.
-7. Update `radar.md`.
-8. Write Far Lens synthesis only when ready.
-9. Update `run_summary.md`.
+6. Promote only important concepts into the wiki.
+7. Update the radar.
+8. Synthesize only when the evidence is ready.
+9. End with a run summary.
 
-The agent starts in Near Lens by default. It switches to Far Lens when there is enough evidence, when a contradiction needs resolution, or when the user explicitly asks for deeper synthesis.
+This keeps observation, concepts, and conclusions separate.
 
 ## Source Triage
 
-Before trusting a source, the agent asks three questions:
+Before trusting a source, the agent checks:
 
-1. What kind of source is this: primary research, review, commentary, journalism, or informal?
-2. Is there a clear author and institutional context?
-3. Does the source support its claims with evidence inside the document, or does it mostly assert?
+| Question | Why It Matters |
+| --- | --- |
+| What kind of source is this? | A paper, blog post, review, primary text, and preprint are not equal. |
+| Who wrote it, and from where? | Author and institutional context affect trust. |
+| Does it show evidence or just assert? | Claims need support inside the source. |
 
-This is intentionally lightweight. It is enough to stop the agent from treating every source as equally reliable.
+This step is small on purpose. It is enough to stop bad sources from silently becoming strong evidence.
 
 ## Concept Wiki
 
-`my_wikipedia/` is the agent's durable concept memory.
+`my_wikipedia/` is not a glossary. It is the agent's durable memory for concepts that matter.
 
-The agent should not create a page for every term. It should promote a concept only when:
+A concept gets promoted when:
 
-- the concept appears in 2 or more independent sources,
-- the concept is central to a user question,
-- the concept is needed for a Far Lens synthesis,
+- it appears in multiple independent sources,
+- it is central to a user question,
+- it is needed for Far Lens synthesis,
 - or the user asks for it.
 
-Example concept pages from tested runs:
+Example concept pages:
 
 | Domain | Concepts |
 | --- | --- |
@@ -108,59 +114,75 @@ Example concept pages from tested runs:
 
 ## Tested Domains
 
-Bifocal has been tested across four example domains.
+Bifocal has been tested on four different research areas.
 
-| Domain | Folder | What It Tested |
+| Domain | Folder | What It Proved |
 | --- | --- | --- |
-| World models | `examples/world_models/` | AI research synthesis and unsupported question handling |
-| Nudging economics | `examples/nudging_economics/` | Policy evidence, ethics, meta-analysis, and publication-bias conflict |
-| Bronze Age collapse | `examples/bronze_age_collapse/` | Archaeology, paleoclimate, and multi-cause historical explanation |
-| Reversible computing | `examples/reversible_computing/` | Thermodynamics, hardware research, and theory versus implementation |
+| World models | `examples/world_models/` | Can synthesize AI papers while leaving unsupported LLM claims open |
+| Nudging economics | `examples/nudging_economics/` | Can handle ethics, meta-analysis, and publication-bias conflict |
+| Bronze Age collapse | `examples/bronze_age_collapse/` | Can avoid single-cause historical explanations |
+| Reversible computing | `examples/reversible_computing/` | Can separate theory, hardware claims, and thermodynamic limits |
 
-## What The Tests Showed
+## What Happened In The Tests
 
 ### World Models
 
-Bifocal built a clean definition of world models and synthesized the Dreamer research line. It also refused to answer an LLM-specific world-model question because the source set did not contain a direct LLM world-model paper.
+Worked:
 
-Open gaps:
+- Built a definition of world models.
+- Synthesized the Dreamer research line.
+- Kept LLM-specific claims open when the sources did not support them.
 
-- Add LLM-specific world-model sources.
-- Run a deeper limitations and failure-modes pass.
+Still open:
+
+- Add LLM-specific sources.
+- Run a deeper limitations pass.
 
 ### Nudging Economics
 
-Bifocal handled a policy evidence set with definition, ethics, meta-analysis, and a publication-bias critique. It surfaced the Mertens versus Maier conflict instead of hiding the disagreement.
+Worked:
 
-Open gaps:
+- Built pages for nudges, choice architecture, and publication bias.
+- Synthesized definition, taxonomy, ethics, failure modes, and effectiveness.
+- Surfaced the Mertens versus Maier conflict.
+
+Still open:
 
 - Add implementation case studies.
-- Add later replies, corrections, or meta-analyses.
+- Add later evidence on publication bias.
 - Add long-term welfare evidence.
 
 ### Bronze Age Collapse
 
-Bifocal treated the Late Bronze Age collapse as a regional transformation rather than a single event. It synthesized climate, trade, migration, warfare, and political fragility as cascading stresses.
+Worked:
 
-Open gaps:
+- Treated collapse as a regional transformation, not one event.
+- Synthesized climate, trade, migration, warfare, and political fragility as cascading stresses.
+- Kept Sea Peoples claims under review.
 
-- Add primary texts for Egyptian, Ugaritic, Hittite, and cuneiform evidence.
+Still open:
+
+- Add primary texts.
 - Build a region-by-region chronology.
-- Add more detailed trade-network evidence.
+- Add trade-network evidence.
 
 ### Reversible Computing
 
-Bifocal separated logical reversibility, invertible logic, and thermodynamic reversibility. It clarified that Landauer's principle is foundational, but not a full practical energy model for real machines.
+Worked:
 
-Open gaps:
+- Separated logical reversibility, invertible logic, and thermodynamic reversibility.
+- Explained why Landauer's principle matters but is not a full energy model.
+- Left adiabatic and quantum comparisons open until better sources are added.
+
+Still open:
 
 - Add Bennett, Fredkin, Toffoli, and reversible circuit synthesis sources.
-- Add adiabatic computing and quantum computing sources.
+- Add adiabatic and quantum computing sources.
 - Add system-level energy benchmarks.
 
-## Repository Structure
+## Folder Layout
 
-```plaintext
+```text
 /
 |-- .agent/
 |   `-- protocol.md
@@ -177,37 +199,36 @@ Open gaps:
 `-- README.md
 ```
 
-## Initialize A New Project
+## Create A New Bifocal Project
 
-Run the initializer in the current directory:
+Run:
 
 ```bash
 ./init.sh
 ```
 
-Or pass a target directory:
+Or choose a target folder:
 
 ```bash
 ./init.sh path/to/project
 ```
 
-The initializer creates the Bifocal folder structure and protocol files. It does not overwrite an existing `my_questions.txt`.
+The initializer creates the scaffold and protocol files. It does not overwrite an existing `my_questions.txt`.
 
 ## Design Principles
 
-- Borrow from Kahneman's fast and slow thinking, but keep the implementation practical.
-- Keep raw sources, quick notes, concept pages, and conclusions separate.
-- Treat questions as steering signals, not the whole workflow.
-- Check source quality before trusting claims.
+- Borrow from Kahneman's fast and slow thinking, but keep the workflow practical.
+- Make the agent inspect evidence before synthesis.
+- Keep raw sources, quick notes, concepts, and conclusions separate.
+- Treat questions as steering signals, not the whole system.
 - Promote concepts sparingly.
 - Surface missing evidence clearly.
-- Synthesize only when the source set supports it.
-- Keep the framework small enough that a user can inspect it.
+- Keep the framework small enough to inspect.
 - Use plain, grounded language.
 - Do not use em dash characters.
 
-## Current Status
+## Status
 
 Bifocal is V0.2-alpha. It is ready to ship as an experimental framework for AI-assisted research workflows.
 
-It is not a substitute for expert review. It should not be used unattended for high-stakes medical, legal, financial, or safety-critical research. Its job is to make an agent's research process easier to inspect, correct, and extend.
+It is not a substitute for expert review. It should not be used unattended for high-stakes medical, legal, financial, or safety-critical research.
