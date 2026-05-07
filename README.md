@@ -13,11 +13,11 @@ The framework gives an AI agent a simple research loop:
 1. Observe incoming material quickly.
 2. Extract high-signal notes and gaps.
 3. Maintain a wiki of reusable concepts.
-4. Track questions, gaps, contradictions, and synthesis candidates in a shared radar.
+4. Track questions, gaps, contradictions, and insight candidates in a shared radar.
 5. Switch to slower synthesis only when the evidence base is ready.
 6. Produce standalone knowledge blocks with backing evidence.
 
-This structure is intended for research work where traceability matters. It keeps raw material, observations, and verified synthesis in separate places so the user can inspect how conclusions formed.
+This structure is intended for research work where traceability matters. It keeps raw material, observations, and verified insights in separate places so the user can inspect how conclusions formed.
 
 Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
@@ -39,42 +39,42 @@ Before System 1 extracts claims, it performs a lightweight source triage: source
 /
 |-- .agent/
 |   |-- protocol.md
-|-- source_material/
-|-- user_questions.txt
-|-- processed_wiki/
-|-- concept_wiki/
-|-- synthesis/
-|-- research_radar.md
-|-- failure_log.md
+|-- sources/
+|-- questions.txt
+|-- observations/
+|-- my_wikipedia/
+|-- insights/
+|-- radar.md
+|-- mistakes.md
 |-- init.sh
 `-- README.md
 ```
 
 ## How to Use
 
-1. Put sources in `source_material/`.
-2. Optionally write questions in `user_questions.txt`, one per line.
+1. Put sources in `sources/`.
+2. Optionally write questions in `questions.txt`, one per line.
 3. Point your AI IDE agent, such as Cursor, Windsurf, or Antigravity, to `.agent/protocol.md`.
 4. Tell the agent: "Run Bifocal."
-5. Review `research_radar.md` for questions, gaps, contradictions, and synthesis readiness.
-6. Review `concept_wiki/` for reusable concepts the agent is building.
+5. Review `radar.md` for questions, gaps, contradictions, and insights readiness.
+6. Review `my_wikipedia/` for reusable concepts the agent is building.
 7. Ask for Far Lens or System 2 when you want a standalone synthesis.
 
 Suggested agent instruction:
 
 ```text
-Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect source_material, read user_questions.txt as optional steering input, update processed_wiki, concept_wiki, and research_radar as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
+Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources, read questions.txt as optional steering input, update observations, my_wikipedia, and radar.md as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
 ```
 
 ## Operating Rules
 
-- Raw source material belongs in `source_material/`.
-- Optional user questions belong in `user_questions.txt`.
-- System 1 summaries belong in `processed_wiki/`.
-- Durable concept pages belong in `concept_wiki/`.
-- Questions, gaps, contradictions, and synthesis candidates belong in `research_radar.md`.
-- System 2 synthesis files belong in `synthesis/`.
-- Every synthesis file must include a Backing Evidence section.
+- Raw source material belongs in `sources/`.
+- Optional user questions belong in `questions.txt`.
+- System 1 summaries belong in `observations/`.
+- Durable concept pages belong in `my_wikipedia/`.
+- Questions, gaps, contradictions, and insight candidates belong in `radar.md`.
+- System 2 insight files belong in `insights/`.
+- Every insight file must include a Backing Evidence section.
 - Every System 2 claim must be checked against Protocol Memory in `.agent/protocol.md`.
 - Contradictions against Protocol Memory require a clear Memory Check.
 
@@ -92,7 +92,7 @@ You can also pass a target directory:
 ./init.sh path/to/project
 ```
 
-The initializer refreshes framework files, but it does not overwrite an existing `user_questions.txt`.
+The initializer refreshes framework files, but it does not overwrite an existing `questions.txt`.
 
 ## Status
 

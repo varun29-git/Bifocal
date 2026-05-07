@@ -15,8 +15,8 @@ The System 1 and System 2 labels are practical shorthand, not claims about agent
 - Do not use em dash characters.
 - Start from first principles.
 - Separate observation from inference.
-- Read `user_questions.txt` before choosing what to work on.
-- Maintain `concept_wiki/` as the durable wiki of reusable concepts.
+- Read `questions.txt` before choosing what to work on.
+- Maintain `my_wikipedia/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
 
 ## Knowledge Ecosystem
@@ -25,11 +25,11 @@ Bifocal is not a question-answering workflow. It is a small research ecosystem.
 
 Maintain these layers:
 
-1. `source_material/` holds raw inputs.
-2. `processed_wiki/` holds short observations from individual sources.
-3. `concept_wiki/` holds reusable concepts that accumulate across sources.
-4. `research_radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and synthesis candidates.
-5. `synthesis/` holds Far Lens outputs.
+1. `sources/` holds raw inputs.
+2. `observations/` holds short observations from individual sources.
+3. `my_wikipedia/` holds reusable concepts that accumulate across sources.
+4. `radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and insight candidates.
+5. `insights/` holds Far Lens outputs.
 6. Protocol Memory holds durable axioms only after synthesis.
 
 Questions are steering signals. They help direct attention, but they are not the only reason to read, organize, synthesize, or update memory.
@@ -38,9 +38,9 @@ Questions are steering signals. They help direct attention, but they are not the
 
 At the start of each research turn:
 
-1. Read `user_questions.txt`, ignoring blank lines and lines that start with `#`.
-2. Add any new user questions to `research_radar.md` as attention items.
-3. Inspect `source_material/` for new or changed sources.
+1. Read `questions.txt`, ignoring blank lines and lines that start with `#`.
+2. Add any new user questions to `radar.md` as attention items.
+3. Inspect `sources/` for new or changed sources.
 4. Use Near Lens unless the user explicitly asks for Far Lens or a source cluster is ready for synthesis.
 
 ## Protocol Memory
@@ -78,9 +78,9 @@ Use the triage to decide how much trust and attention the source deserves.
 Use it for quick observation:
 
 1. Read or skim incoming source material.
-2. Write a short note in `processed_wiki/` only when the material contains a useful signal.
+2. Write a short note in `observations/` only when the material contains a useful signal.
 3. Mark concept candidates in the observation note when the material clarifies a reusable idea.
-4. Add or update `research_radar.md` when the signal creates a question, gap, contradiction, or synthesis candidate.
+4. Add or update `radar.md` when the signal creates a question, gap, contradiction, or insight candidate.
 
 System 1 notes should be brief.
 
@@ -107,9 +107,9 @@ Do not force every source into the template if a one-line radar update is enough
 
 ## Attention Radar
 
-Use `research_radar.md` as the active attention layer, not as the whole research system.
+Use `radar.md` as the active attention layer, not as the whole research system.
 
-Use `user_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `user_questions.txt` is not already represented in the radar, add it under User Questions.
+Use `questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `questions.txt` is not already represented in the radar, add it under User Questions.
 
 For each useful source, add one short evidence tag under the most relevant attention item:
 
@@ -119,7 +119,7 @@ For each useful source, add one short evidence tag under the most relevant atten
   Adds: {one sentence explaining what this source adds that the others do not}
 ```
 
-If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or synthesis candidate.
+If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or insight candidate.
 
 If a turn only updates observations or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
 
@@ -130,16 +130,16 @@ If the user provides sources but no active question, still run Near Lens:
 1. Triage new sources.
 2. Write useful observations.
 3. Mark concept candidates in observation notes.
-4. Add only the most important emergent questions, gaps, or contradictions to `research_radar.md`.
+4. Add only the most important emergent questions, gaps, or contradictions to `radar.md`.
 5. End with one next action.
 
 ## Concept Wiki
 
-Use `concept_wiki/` for promoted concepts, not every concept mentioned in a source.
+Use `my_wikipedia/` for promoted concepts, not every concept mentioned in a source.
 
-Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `processed_wiki/` observation notes using `Concept Candidates`.
+Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `observations/` observation notes using `Concept Candidates`.
 
-Promote a candidate to `concept_wiki/` only when one condition is true:
+Promote a candidate to `my_wikipedia/` only when one condition is true:
 
 1. It appears in 2 or more independent sources.
 2. It is central to a user question or active radar item.
@@ -151,7 +151,7 @@ Create at most 3 new concept pages per research turn unless the user asks otherw
 Create one markdown file per concept using a short lowercase filename:
 
 ```text
-concept_wiki/{concept-name}.md
+my_wikipedia/{concept-name}.md
 ```
 
 Use this structure:
@@ -199,7 +199,7 @@ Before writing the synthesis, check:
 6. Does the answer conflict with Protocol Memory?
 7. Which concept candidates should be promoted, or which existing concept pages should be updated?
 
-System 2 output goes in `synthesis/` and uses this naming pattern:
+System 2 output goes in `insights/` and uses this naming pattern:
 
 ```text
 insight_{ID}.md
@@ -235,7 +235,7 @@ The Counterevidence and Limits section must include bias checks such as substitu
 
 ## Contradictions
 
-If a synthesis conflicts with Protocol Memory, do not silently overwrite memory.
+If an insight conflicts with Protocol Memory, do not silently overwrite memory.
 
 Record the conflict in the Memory Check section:
 
@@ -250,7 +250,7 @@ Only update Protocol Memory when the reason is clear enough for a future agent t
 
 ## Failure Log
 
-Append to `failure_log.md` when the agent catches itself doing substitution, anchoring, WYSIATI, or a related reasoning drift mid-turn.
+Append to `mistakes.md` when the agent catches itself doing substitution, anchoring, WYSIATI, or a related reasoning drift mid-turn.
 
 Use one line:
 
@@ -265,7 +265,7 @@ Before ending a research turn, verify:
 1. The response matches the user's request or the active research focus.
 2. Observation and inference are separated.
 3. Missing evidence is visible.
-4. At least one appropriate state artifact was updated: `processed_wiki/`, `concept_wiki/`, `research_radar.md`, `synthesis/`, or Protocol Memory.
+4. At least one appropriate state artifact was updated: `observations/`, `my_wikipedia/`, `radar.md`, `insights/`, or Protocol Memory.
 5. Questions were not invented just to make the radar look active.
-6. Any caught reasoning drift was logged in `failure_log.md`.
+6. Any caught reasoning drift was logged in `mistakes.md`.
 7. No em dash characters were introduced.
