@@ -19,14 +19,29 @@ The System 1 and System 2 labels are practical shorthand, not claims about agent
 - Maintain `concept_wiki/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
 
+## Knowledge Ecosystem
+
+Bifocal is not a question-answering workflow. It is a small research ecosystem.
+
+Maintain these layers:
+
+1. `source_material/` holds raw inputs.
+2. `processed_wiki/` holds short observations from individual sources.
+3. `concept_wiki/` holds reusable concepts that accumulate across sources.
+4. `research_radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and synthesis candidates.
+5. `synthesis/` holds Far Lens outputs.
+6. Protocol Memory holds durable axioms only after synthesis.
+
+Questions are steering signals. They help direct attention, but they are not the only reason to read, organize, synthesize, or update memory.
+
 ## Start Here
 
 At the start of each research turn:
 
 1. Read `user_questions.txt`, ignoring blank lines and lines that start with `#`.
-2. Promote any new user questions into `research_radar.md`.
+2. Add any new user questions to `research_radar.md` as attention items.
 3. Inspect `source_material/` for new or changed sources.
-4. Use Near Lens unless the user explicitly asks for Far Lens or System 2.
+4. Use Near Lens unless the user explicitly asks for Far Lens or a source cluster is ready for synthesis.
 
 ## Protocol Memory
 
@@ -65,7 +80,7 @@ Use it for quick observation:
 1. Read or skim incoming source material.
 2. Write a short note in `processed_wiki/` only when the material contains a useful signal.
 3. Add or update a concept page in `concept_wiki/` when the material clarifies a reusable idea.
-4. Add or update a question in `research_radar.md` when the signal affects an active research direction.
+4. Add or update `research_radar.md` when the signal creates a question, gap, contradiction, or synthesis candidate.
 
 System 1 notes should be brief.
 
@@ -86,13 +101,13 @@ Date:
 
 Do not force every source into the template if a one-line radar update is enough.
 
-## Radar Check
+## Attention Radar
 
-Use `research_radar.md` as the active question list.
+Use `research_radar.md` as the active attention layer, not as the whole research system.
 
 Use `user_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `user_questions.txt` is not already represented in the radar, add it under User Questions.
 
-For each useful source, add one short evidence tag under the most relevant question:
+For each useful source, add one short evidence tag under the most relevant attention item:
 
 ```markdown
 - Source: {file or source name}
@@ -100,9 +115,19 @@ For each useful source, add one short evidence tag under the most relevant quest
   Adds: {one sentence explaining what this source adds that the others do not}
 ```
 
-If no question matches, add a new question only when it points to a real gap.
+If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or synthesis candidate.
 
-If the agent has not updated `research_radar.md` in the current research turn, the turn is not complete.
+If a turn only updates observations or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
+
+## Exploration Mode
+
+If the user provides sources but no active question, still run Near Lens:
+
+1. Triage new sources.
+2. Write useful observations.
+3. Create or update concept pages.
+4. Add only the most important emergent questions, gaps, or contradictions to `research_radar.md`.
+5. End with one next action.
 
 ## Concept Wiki
 
@@ -137,12 +162,13 @@ Keep concept pages short. They are living wiki pages, not final syntheses.
 
 ## Transition Trigger
 
-Switch to System 2 when either condition is true:
+Switch to Far Lens, also called System 2, when either condition is true:
 
-1. A question has 3 or more evidence tags with distinct Adds lines.
-2. The user explicitly asks for System 2.
+1. A research focus has 3 or more evidence tags with distinct Adds lines.
+2. A concept, contradiction, or claim cluster needs consolidation.
+3. The user explicitly asks for Far Lens or System 2.
 
-Distinct Adds lines are a readiness signal. Confirm source independence during synthesis.
+Distinct Adds lines are a readiness signal, not proof. Confirm source quality and independence during synthesis.
 
 ## System 2
 
@@ -150,7 +176,7 @@ System 2 is deliberate synthesis.
 
 Before writing the synthesis, check:
 
-1. What question is being answered?
+1. What focus is being synthesized: question, concept, contradiction, claim cluster, or decision?
 2. Which sources actually bear on it?
 3. What does each source add that the others do not?
 4. What assumptions are doing work?
@@ -171,9 +197,9 @@ Required structure:
 
 Status: Stable | Under Review
 
-## Question
+## Focus
 
-## Short Answer
+## Synthesis
 
 ## Backing Evidence
 
@@ -214,17 +240,17 @@ Append to `failure_log.md` when the agent catches itself doing substitution, anc
 Use one line:
 
 ```markdown
-- Date: {YYYY-MM-DD} | Question: {question} | Failure Mode: {mode} | What Changed: {correction}
+- Date: {YYYY-MM-DD} | Focus: {question, concept, claim, or synthesis} | Failure Mode: {mode} | What Changed: {correction}
 ```
 
 ## End-of-Turn Check
 
 Before ending a research turn, verify:
 
-1. The answer matches the user's actual question.
+1. The response matches the user's request or the active research focus.
 2. Observation and inference are separated.
 3. Missing evidence is visible.
-4. `research_radar.md` was updated in this turn.
-5. `concept_wiki/` was updated when reusable concepts changed.
+4. At least one appropriate state artifact was updated: `processed_wiki/`, `concept_wiki/`, `research_radar.md`, `synthesis/`, or Protocol Memory.
+5. Questions were not invented just to make the radar look active.
 6. Any caught reasoning drift was logged in `failure_log.md`.
 7. No em dash characters were introduced.
