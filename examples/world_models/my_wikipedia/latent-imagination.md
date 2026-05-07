@@ -1,6 +1,6 @@
 # Latent Imagination
 
-Status: Draft
+Status: Stable
 
 ## Working Definition
 
@@ -23,3 +23,7 @@ It is a core mechanism in Dreamer. It lets the agent evaluate and improve action
 
 - When does latent imagination fail because the learned model is inaccurate?
 - How much horizon is enough before imagined rollouts become misleading?
+
+## Related Deep Insights
+
+- `deep_insights/deep_insight_003_dreamer_research_line.md`

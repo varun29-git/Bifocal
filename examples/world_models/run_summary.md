@@ -1,31 +1,26 @@
 # Run Summary
 
 Last Run: 2026-05-08
-Mode: Near Lens
+Mode: Far Lens
 
 ## Updated
 
-- `quick_notes/ha-schmidhuber-world-models.md`
-- `quick_notes/dreamer-v1-latent-imagination.md`
-- `quick_notes/dreamer-v2-discrete-world-models.md`
-- `quick_notes/dreamer-v3-diverse-domains.md`
-- `quick_notes/lecun-jepa-world-models.md`
+- `deep_insights/deep_insight_001_world_model_definition.md`
+- `deep_insights/deep_insight_002_predictive_representation_evidence.md`
+- `deep_insights/deep_insight_003_dreamer_research_line.md`
 - `my_wikipedia/world-model.md`
 - `my_wikipedia/latent-imagination.md`
 - `radar.md`
 
 ## Ready for Far Lens
 
-- Q-001: What is a world model in machine learning?
-- Q-003: What evidence would show that a model has learned a useful predictive representation of its environment?
-- A-001: Dreamer as a world-model research line
-
-No deep insight was written in this run. These items are ready, but synthesis was deliberately deferred.
+- None remaining from the first ready batch. Q-001, Q-003, and A-001 were synthesized.
 
 ## Blocked or Missing
 
-- Q-002 needs at least one direct LLM-specific world-model source before synthesis.
+- Q-002 remains open because the source set has no direct LLM-specific world-model paper.
+- Q-004 remains open because limitations and failure modes need a deeper methods, ablations, and caveats pass.
 
 ## Next Action
 
-Run Far Lens on Q-001 or Q-003, or add an LLM-specific source before answering Q-002.
+Add an LLM-specific world-model source for Q-002, or run a limitations pass on Q-004.

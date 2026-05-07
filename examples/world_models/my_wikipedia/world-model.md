@@ -1,6 +1,6 @@
 # World Model
 
-Status: Draft
+Status: Stable
 
 ## Working Definition
 
@@ -27,3 +27,8 @@ World models are the central concept connecting the source set. They support com
 
 - What evidence is sufficient to say a model has learned a useful world model rather than a task-specific predictive shortcut?
 - How should generative latent dynamics and joint embedding predictive architectures be compared?
+
+## Related Deep Insights
+
+- `deep_insights/deep_insight_001_world_model_definition.md`
+- `deep_insights/deep_insight_002_predictive_representation_evidence.md`

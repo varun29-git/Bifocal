@@ -8,7 +8,7 @@ Keep entries short. The radar should show what deserves attention next. It is no
 
 ### Q-001: What is a world model in machine learning?
 
-Status: Ready for Far Lens
+Status: Synthesized
 
 Evidence:
 
@@ -24,7 +24,7 @@ Evidence:
 
 Notes:
 
-Near Lens has enough distinct evidence to synthesize a first definition, but the answer should separate empirical RL systems from broader architecture proposals.
+Synthesized in `deep_insights/deep_insight_001_world_model_definition.md`.
 
 ### Q-002: How do world models differ across reinforcement learning, robotics, and large language model research?
 
@@ -51,7 +51,7 @@ This source set covers RL and robotics-adjacent control. It does not yet include
 
 ### Q-003: What evidence would show that a model has learned a useful predictive representation of its environment?
 
-Status: Ready for Far Lens
+Status: Synthesized
 
 Evidence:
 
@@ -70,7 +70,7 @@ Evidence:
 
 Notes:
 
-Ready for Far Lens, but synthesis should distinguish predictive accuracy, behavioral performance, transfer, and robustness as different evidence types.
+Synthesized in `deep_insights/deep_insight_002_predictive_representation_evidence.md`.
 
 ### Q-004: What are the main limitations or failure modes of current world-model approaches?
 
@@ -100,7 +100,7 @@ Needs deeper reading of methods and limitations sections before synthesis.
 ### A-001: Dreamer as a world-model research line
 
 Type: Concept Cluster
-Status: Ready for Far Lens
+Status: Synthesized
 
 Why It Matters:
 
@@ -120,7 +120,7 @@ Evidence:
 
 Next Action:
 
-Read the methods sections for V1, V2, and V3 side by side before writing a deep insight.
+Synthesized in `deep_insights/deep_insight_003_dreamer_research_line.md`. Next pass should read methods and ablations for V1, V2, and V3 side by side.
 
 ### A-002: Missing LLM-specific world-model evidence
 
@@ -146,4 +146,7 @@ Add at least one LLM-specific source before answering the LLM comparison part.
 ```markdown
 | Deep Insight ID | File | Source Focus | Status |
 | --- | --- | --- | --- |
+| 001 | `deep_insights/deep_insight_001_world_model_definition.md` | Q-001 | Stable |
+| 002 | `deep_insights/deep_insight_002_predictive_representation_evidence.md` | Q-003 | Stable |
+| 003 | `deep_insights/deep_insight_003_dreamer_research_line.md` | A-001 | Under Review |
 ```
