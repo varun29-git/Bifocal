@@ -2,7 +2,12 @@
 
 This file is both the operating protocol and the project memory.
 
-Use the System 1 and System 2 labels as research modes. They are inspired by *Thinking, Fast and Slow*, but they are not claims about agent cognition.
+Use Bifocal as a two-lens research mode:
+
+- Near Lens, also called System 1, is for source triage, observations, gaps, and contradictions.
+- Far Lens, also called System 2, is for synthesis, concept consolidation, and memory updates.
+
+The System 1 and System 2 labels are practical shorthand, not claims about agent cognition.
 
 ## Non-Negotiables
 
@@ -10,7 +15,18 @@ Use the System 1 and System 2 labels as research modes. They are inspired by *Th
 - Do not use em dash characters.
 - Start from first principles.
 - Separate observation from inference.
+- Read `user_questions.txt` before choosing what to work on.
+- Maintain `concept_wiki/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
+
+## Start Here
+
+At the start of each research turn:
+
+1. Read `user_questions.txt`, ignoring blank lines and lines that start with `#`.
+2. Promote any new user questions into `research_radar.md`.
+3. Inspect `source_material/` for new or changed sources.
+4. Use Near Lens unless the user explicitly asks for Far Lens or System 2.
 
 ## Protocol Memory
 
@@ -48,7 +64,8 @@ Use it for quick observation:
 
 1. Read or skim incoming source material.
 2. Write a short note in `processed_wiki/` only when the material contains a useful signal.
-3. Add or update a question in `research_radar.md` when the signal affects an active research direction.
+3. Add or update a concept page in `concept_wiki/` when the material clarifies a reusable idea.
+4. Add or update a question in `research_radar.md` when the signal affects an active research direction.
 
 System 1 notes should be brief.
 
@@ -73,6 +90,8 @@ Do not force every source into the template if a one-line radar update is enough
 
 Use `research_radar.md` as the active question list.
 
+Use `user_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `user_questions.txt` is not already represented in the radar, add it under User Questions.
+
 For each useful source, add one short evidence tag under the most relevant question:
 
 ```markdown
@@ -84,6 +103,37 @@ For each useful source, add one short evidence tag under the most relevant quest
 If no question matches, add a new question only when it points to a real gap.
 
 If the agent has not updated `research_radar.md` in the current research turn, the turn is not complete.
+
+## Concept Wiki
+
+Use `concept_wiki/` for stable, reusable concepts that appear across sources or help explain the research area.
+
+Create one markdown file per concept using a short lowercase filename:
+
+```text
+concept_wiki/{concept-name}.md
+```
+
+Use this structure:
+
+```markdown
+# {Concept Name}
+
+Status: Draft | Stable | Under Review
+
+## Working Definition
+
+## Why It Matters
+
+## Source Notes
+
+- Source:
+  Adds:
+
+## Open Questions
+```
+
+Keep concept pages short. They are living wiki pages, not final syntheses.
 
 ## Transition Trigger
 
@@ -106,6 +156,7 @@ Before writing the synthesis, check:
 4. What assumptions are doing work?
 5. What would weaken or falsify the answer?
 6. Does the answer conflict with Protocol Memory?
+7. Which concept pages should be created or updated?
 
 System 2 output goes in `synthesis/` and uses this naming pattern:
 
@@ -174,5 +225,6 @@ Before ending a research turn, verify:
 2. Observation and inference are separated.
 3. Missing evidence is visible.
 4. `research_radar.md` was updated in this turn.
-5. Any caught reasoning drift was logged in `failure_log.md`.
-6. No em dash characters were introduced.
+5. `concept_wiki/` was updated when reusable concepts changed.
+6. Any caught reasoning drift was logged in `failure_log.md`.
+7. No em dash characters were introduced.
