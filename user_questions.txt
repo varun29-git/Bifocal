@@ -1,3 +1,3 @@
-# Write your research questions here, one per line.
+# Optional: write research questions here, one per line.
 # Example:
 # What should this source set help us understand?
