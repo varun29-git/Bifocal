@@ -26,6 +26,8 @@ System 2 is the synthesis layer. It is slower, evidence-backed, and deliberate. 
 
 Both layers must work from first principles. The agent should deconstruct every claim into its source, mechanism, assumption, and implication before treating it as useful knowledge.
 
+Before System 1 extracts claims, it performs a lightweight source triage: source type, author or institutional context, and whether the source supports its claims with internal evidence or merely asserts them.
+
 ## Repository Structure
 
 ```plaintext
