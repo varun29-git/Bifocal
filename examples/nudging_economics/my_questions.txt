@@ -1,0 +1,6 @@
+# Optional: write research questions here, one per line.
+What is a nudge in economics and behavioral policy?
+How do nudges differ from incentives, mandates, defaults, and information campaigns?
+What evidence shows that nudges change behavior in durable or welfare-improving ways?
+What are the main ethical objections and failure modes of nudging?
+When do nudges work poorly or backfire?
