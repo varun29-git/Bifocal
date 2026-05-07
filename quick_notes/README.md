@@ -1,4 +1,4 @@
-# Observations
+# Quick Notes
 
 This folder holds short Near Lens notes from individual sources.
 

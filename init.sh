@@ -3,7 +3,7 @@ set -euo pipefail
 
 TARGET="${1:-.}"
 
-mkdir -p "$TARGET/.agent" "$TARGET/sources" "$TARGET/observations" "$TARGET/my_wikipedia" "$TARGET/insights"
+mkdir -p "$TARGET/.agent" "$TARGET/sources" "$TARGET/quick_notes" "$TARGET/my_wikipedia" "$TARGET/deep_insights"
 rm -f "$TARGET/.agent/project_memory.md"
 
 cat > "$TARGET/README.md" <<'EOF_README'
@@ -15,7 +15,7 @@ Bifocal is a small research scaffold for AI-integrated IDEs. It helps an agent t
 
 Bifocal has two lenses:
 
-- Near Lens for quick source triage, observations, gaps, and contradictions.
+- Near Lens for quick source triage, quick notes, gaps, and contradictions.
 - Far Lens for slower synthesis, concept consolidation, and memory updates.
 
 The framework can use System 1 and System 2 as familiar labels, but the product idea is simpler: shift focus without losing the evidence trail.
@@ -23,11 +23,11 @@ The framework can use System 1 and System 2 as familiar labels, but the product 
 ## What It Provides
 
 - `sources/` for raw inputs.
-- `questions.txt` for optional plain-language questions from the user.
-- `observations/` for short System 1 observations.
+- `my_questions.txt` for optional plain-language questions from the user.
+- `quick_notes/` for short System 1 quick_notes.
 - `my_wikipedia/` for durable concept pages that accumulate across sources.
-- `insights/` for System 2 knowledge blocks.
-- `radar.md` for questions, gaps, contradictions, concept clusters, and insight candidates.
+- `deep_insights/` for System 2 knowledge blocks.
+- `radar.md` for questions, gaps, contradictions, concept clusters, and deep insight candidates.
 - `mistakes.md` for one-line records of caught reasoning drift.
 - `.agent/protocol.md` for operating instructions and project memory.
 
@@ -58,35 +58,37 @@ Every important claim should still be broken down from first principles:
 |-- .agent/
 |   `-- protocol.md
 |-- sources/
-|-- questions.txt
-|-- observations/
+|-- my_questions.txt
+|-- quick_notes/
 |-- my_wikipedia/
-|-- insights/
+|-- deep_insights/
 |-- radar.md
 |-- mistakes.md
 |-- init.sh
 `-- README.md
 ```
 
+Each folder includes a small `README.md` explaining what belongs there.
+
 ## How to Use
 
 1. Put sources in `sources/`.
-2. Optionally write questions in `questions.txt`, one per line.
+2. Optionally write questions in `my_questions.txt`, one per line.
 3. Tell the agent: "Run Bifocal."
-4. Read `radar.md` for questions, gaps, contradictions, and insights readiness.
+4. Read `radar.md` for questions, gaps, contradictions, and deep insight readiness.
 5. Read `my_wikipedia/` for reusable concepts the agent is building.
 6. Ask for Far Lens or System 2 when you want a standalone synthesis.
 
 Suggested IDE instruction:
 
 ```text
-Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources, read questions.txt as optional steering input, update observations, my_wikipedia, and radar.md as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
+Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect sources, read my_questions.txt as optional steering input, update quick_notes, my_wikipedia, and radar.md as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
 ```
 
 ## Design Principles
 
-- Keep raw inputs, observations, and conclusions separate.
-- Keep user input simple: optional questions go in `questions.txt`.
+- Keep raw inputs, quick notes, and conclusions separate.
+- Keep user input simple: optional questions go in `my_questions.txt`.
 - Keep reusable concepts in `my_wikipedia/`.
 - Prefer short useful notes over elaborate compliance.
 - Treat source count as a readiness signal, not proof.
@@ -129,7 +131,7 @@ This file is both the operating protocol and the project memory.
 
 Use Bifocal as a two-lens research mode:
 
-- Near Lens, also called System 1, is for source triage, observations, gaps, and contradictions.
+- Near Lens, also called System 1, is for source triage, quick notes, gaps, and contradictions.
 - Far Lens, also called System 2, is for synthesis, concept consolidation, and memory updates.
 
 The System 1 and System 2 labels are practical shorthand, not claims about agent cognition.
@@ -140,7 +142,7 @@ The System 1 and System 2 labels are practical shorthand, not claims about agent
 - Do not use em dash characters.
 - Start from first principles.
 - Separate observation from inference.
-- Read `questions.txt` before choosing what to work on.
+- Read `my_questions.txt` before choosing what to work on.
 - Maintain `my_wikipedia/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
 
@@ -151,10 +153,10 @@ Bifocal is not a question-answering workflow. It is a small research ecosystem.
 Maintain these layers:
 
 1. `sources/` holds raw inputs.
-2. `observations/` holds short observations from individual sources.
+2. `quick_notes/` holds short quick notes from individual sources.
 3. `my_wikipedia/` holds reusable concepts that accumulate across sources.
-4. `radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and insight candidates.
-5. `insights/` holds Far Lens outputs.
+4. `radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and deep insight candidates.
+5. `deep_insights/` holds Far Lens outputs.
 6. Protocol Memory holds durable axioms only after synthesis.
 
 Questions are steering signals. They help direct attention, but they are not the only reason to read, organize, synthesize, or update memory.
@@ -163,7 +165,7 @@ Questions are steering signals. They help direct attention, but they are not the
 
 At the start of each research turn:
 
-1. Read `questions.txt`, ignoring blank lines and lines that start with `#`.
+1. Read `my_questions.txt`, ignoring blank lines and lines that start with `#`.
 2. Add any new user questions to `radar.md` as attention items.
 3. Inspect `sources/` for new or changed sources.
 4. Use Near Lens unless the user explicitly asks for Far Lens or a source cluster is ready for synthesis.
@@ -203,7 +205,7 @@ Use the triage to decide how much trust and attention the source deserves.
 Use it for quick observation:
 
 1. Read or skim incoming source material.
-2. Write a short note in `observations/` only when the material contains a useful signal.
+2. Write a short note in `quick_notes/` only when the material contains a useful signal.
 3. Mark concept candidates in the observation note when the material clarifies a reusable idea.
 4. Add or update `radar.md` when the signal creates a question, gap, contradiction, or insight candidate.
 
@@ -234,7 +236,7 @@ Do not force every source into the template if a one-line radar update is enough
 
 Use `radar.md` as the active attention layer, not as the whole research system.
 
-Use `questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `questions.txt` is not already represented in the radar, add it under User Questions.
+Use `my_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `my_questions.txt` is not already represented in the radar, add it under User Questions.
 
 For each useful source, add one short evidence tag under the most relevant attention item:
 
@@ -246,14 +248,14 @@ For each useful source, add one short evidence tag under the most relevant atten
 
 If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or insight candidate.
 
-If a turn only updates observations or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
+If a turn only updates quick notes or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
 
 ## Exploration Mode
 
 If the user provides sources but no active question, still run Near Lens:
 
 1. Triage new sources.
-2. Write useful observations.
+2. Write useful quick notes.
 3. Mark concept candidates in observation notes.
 4. Add only the most important emergent questions, gaps, or contradictions to `radar.md`.
 5. End with one next action.
@@ -262,7 +264,7 @@ If the user provides sources but no active question, still run Near Lens:
 
 Use `my_wikipedia/` for promoted concepts, not every concept mentioned in a source.
 
-Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `observations/` observation notes using `Concept Candidates`.
+Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `quick_notes/` observation notes using `Concept Candidates`.
 
 Promote a candidate to `my_wikipedia/` only when one condition is true:
 
@@ -324,10 +326,10 @@ Before writing the synthesis, check:
 6. Does the answer conflict with Protocol Memory?
 7. Which concept candidates should be promoted, or which existing concept pages should be updated?
 
-System 2 output goes in `insights/` and uses this naming pattern:
+System 2 output goes in `deep_insights/` and uses this naming pattern:
 
 ```text
-insight_{ID}.md
+deep_insight_{ID}.md
 ```
 
 Required structure:
@@ -390,14 +392,14 @@ Before ending a research turn, verify:
 1. The response matches the user's request or the active research focus.
 2. Observation and inference are separated.
 3. Missing evidence is visible.
-4. At least one appropriate state artifact was updated: `observations/`, `my_wikipedia/`, `radar.md`, `insights/`, or Protocol Memory.
+4. At least one appropriate state artifact was updated: `quick_notes/`, `my_wikipedia/`, `radar.md`, `deep_insights/`, or Protocol Memory.
 5. Questions were not invented just to make the radar look active.
 6. Any caught reasoning drift was logged in `mistakes.md`.
 7. No em dash characters were introduced.
 EOF_PROTOCOL
 
-if [ ! -f "$TARGET/questions.txt" ]; then
-  cat > "$TARGET/questions.txt" <<'EOF_QUESTIONS'
+if [ ! -f "$TARGET/my_questions.txt" ]; then
+  cat > "$TARGET/my_questions.txt" <<'EOF_QUESTIONS'
 # Optional: write research questions here, one per line.
 # Example:
 # What should this source set help us understand?
@@ -409,11 +411,11 @@ cat > "$TARGET/sources/README.md" <<'EOF_SOURCES_README'
 
 Put raw material here: PDFs, notes, transcripts, articles, copied text, exports, and links saved as text.
 
-The agent reads this folder first, triages source quality, and turns useful signals into observations.
+The agent reads this folder first, triages source quality, and turns useful signals into quick notes.
 EOF_SOURCES_README
 
-cat > "$TARGET/observations/README.md" <<'EOF_OBSERVATIONS_README'
-# Observations
+cat > "$TARGET/quick_notes/README.md" <<'EOF_OBSERVATIONS_README'
+# Quick Notes
 
 This folder holds short Near Lens notes from individual sources.
 
@@ -430,8 +432,8 @@ Do not create a page for every mentioned term. Promote a concept here only when 
 Use one short markdown file per promoted concept. Keep pages brief, sourced, and easy to revise.
 EOF_CONCEPT_WIKI
 
-cat > "$TARGET/insights/README.md" <<'EOF_INSIGHTS_README'
-# Insights
+cat > "$TARGET/deep_insights/README.md" <<'EOF_INSIGHTS_README'
+# Deep Insights
 
 This folder holds Far Lens synthesis files.
 
@@ -443,13 +445,13 @@ cat > "$TARGET/radar.md" <<'EOF_RADAR'
 
 This file is Bifocal's attention layer.
 
-Keep entries short. The radar should show what deserves attention next. It is not the whole research system and it should not replace `observations/`, `my_wikipedia/`, or `insights/`.
+Keep entries short. The radar should show what deserves attention next. It is not the whole research system and it should not replace `quick_notes/`, `my_wikipedia/`, or `deep_insights/`.
 
-Use it for user questions, emergent questions, gaps, contradictions, concept clusters, and insight candidates.
+Use it for user questions, emergent questions, gaps, contradictions, concept clusters, and deep insight candidates.
 
 ## User Questions
 
-Questions the researcher explicitly wrote in `questions.txt` or asked in conversation.
+Questions the researcher explicitly wrote in `my_questions.txt` or asked in conversation.
 
 ```markdown
 ### Q-{ID}: {Question}
@@ -489,9 +491,9 @@ Next Action:
 ## Synthesis Ledger
 
 ```markdown
-| Insight ID | File | Source Focus | Status |
+| Deep Insight ID | File | Source Focus | Status |
 | --- | --- | --- | --- |
-| example | insights/insight_example.md | A-001 | Under Review |
+| example | deep_insights/deep_insight_example.md | A-001 | Under Review |
 ```
 
 Status values:
@@ -513,9 +515,9 @@ Template:
 EOF_FAILURE
 
 : > "$TARGET/sources/.gitkeep"
-: > "$TARGET/observations/.gitkeep"
+: > "$TARGET/quick_notes/.gitkeep"
 : > "$TARGET/my_wikipedia/.gitkeep"
-: > "$TARGET/insights/.gitkeep"
+: > "$TARGET/deep_insights/.gitkeep"
 
 SOURCE_SCRIPT="$0"
 if [ -f "$SOURCE_SCRIPT" ]; then

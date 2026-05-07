@@ -2,13 +2,13 @@
 
 This file is Bifocal's attention layer.
 
-Keep entries short. The radar should show what deserves attention next. It is not the whole research system and it should not replace `observations/`, `my_wikipedia/`, or `insights/`.
+Keep entries short. The radar should show what deserves attention next. It is not the whole research system and it should not replace `quick_notes/`, `my_wikipedia/`, or `deep_insights/`.
 
-Use it for user questions, emergent questions, gaps, contradictions, concept clusters, and insight candidates.
+Use it for user questions, emergent questions, gaps, contradictions, concept clusters, and deep insight candidates.
 
 ## User Questions
 
-Questions the researcher explicitly wrote in `questions.txt` or asked in conversation.
+Questions the researcher explicitly wrote in `my_questions.txt` or asked in conversation.
 
 ```markdown
 ### Q-{ID}: {Question}
@@ -48,9 +48,9 @@ Next Action:
 ## Synthesis Ledger
 
 ```markdown
-| Insight ID | File | Source Focus | Status |
+| Deep Insight ID | File | Source Focus | Status |
 | --- | --- | --- | --- |
-| example | insights/insight_example.md | A-001 | Under Review |
+| example | deep_insights/deep_insight_example.md | A-001 | Under Review |
 ```
 
 Status values:

@@ -1,4 +1,4 @@
-# Insights
+# Deep Insights
 
 This folder holds Far Lens synthesis files.
 

@@ -4,7 +4,7 @@ This file is both the operating protocol and the project memory.
 
 Use Bifocal as a two-lens research mode:
 
-- Near Lens, also called System 1, is for source triage, observations, gaps, and contradictions.
+- Near Lens, also called System 1, is for source triage, quick notes, gaps, and contradictions.
 - Far Lens, also called System 2, is for synthesis, concept consolidation, and memory updates.
 
 The System 1 and System 2 labels are practical shorthand, not claims about agent cognition.
@@ -15,7 +15,7 @@ The System 1 and System 2 labels are practical shorthand, not claims about agent
 - Do not use em dash characters.
 - Start from first principles.
 - Separate observation from inference.
-- Read `questions.txt` before choosing what to work on.
+- Read `my_questions.txt` before choosing what to work on.
 - Maintain `my_wikipedia/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
 
@@ -26,10 +26,10 @@ Bifocal is not a question-answering workflow. It is a small research ecosystem.
 Maintain these layers:
 
 1. `sources/` holds raw inputs.
-2. `observations/` holds short observations from individual sources.
+2. `quick_notes/` holds short quick notes from individual sources.
 3. `my_wikipedia/` holds reusable concepts that accumulate across sources.
-4. `radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and insight candidates.
-5. `insights/` holds Far Lens outputs.
+4. `radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and deep insight candidates.
+5. `deep_insights/` holds Far Lens outputs.
 6. Protocol Memory holds durable axioms only after synthesis.
 
 Questions are steering signals. They help direct attention, but they are not the only reason to read, organize, synthesize, or update memory.
@@ -38,7 +38,7 @@ Questions are steering signals. They help direct attention, but they are not the
 
 At the start of each research turn:
 
-1. Read `questions.txt`, ignoring blank lines and lines that start with `#`.
+1. Read `my_questions.txt`, ignoring blank lines and lines that start with `#`.
 2. Add any new user questions to `radar.md` as attention items.
 3. Inspect `sources/` for new or changed sources.
 4. Use Near Lens unless the user explicitly asks for Far Lens or a source cluster is ready for synthesis.
@@ -78,7 +78,7 @@ Use the triage to decide how much trust and attention the source deserves.
 Use it for quick observation:
 
 1. Read or skim incoming source material.
-2. Write a short note in `observations/` only when the material contains a useful signal.
+2. Write a short note in `quick_notes/` only when the material contains a useful signal.
 3. Mark concept candidates in the observation note when the material clarifies a reusable idea.
 4. Add or update `radar.md` when the signal creates a question, gap, contradiction, or insight candidate.
 
@@ -109,7 +109,7 @@ Do not force every source into the template if a one-line radar update is enough
 
 Use `radar.md` as the active attention layer, not as the whole research system.
 
-Use `questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `questions.txt` is not already represented in the radar, add it under User Questions.
+Use `my_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `my_questions.txt` is not already represented in the radar, add it under User Questions.
 
 For each useful source, add one short evidence tag under the most relevant attention item:
 
@@ -121,14 +121,14 @@ For each useful source, add one short evidence tag under the most relevant atten
 
 If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or insight candidate.
 
-If a turn only updates observations or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
+If a turn only updates quick notes or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
 
 ## Exploration Mode
 
 If the user provides sources but no active question, still run Near Lens:
 
 1. Triage new sources.
-2. Write useful observations.
+2. Write useful quick notes.
 3. Mark concept candidates in observation notes.
 4. Add only the most important emergent questions, gaps, or contradictions to `radar.md`.
 5. End with one next action.
@@ -137,7 +137,7 @@ If the user provides sources but no active question, still run Near Lens:
 
 Use `my_wikipedia/` for promoted concepts, not every concept mentioned in a source.
 
-Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `observations/` observation notes using `Concept Candidates`.
+Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `quick_notes/` observation notes using `Concept Candidates`.
 
 Promote a candidate to `my_wikipedia/` only when one condition is true:
 
@@ -199,10 +199,10 @@ Before writing the synthesis, check:
 6. Does the answer conflict with Protocol Memory?
 7. Which concept candidates should be promoted, or which existing concept pages should be updated?
 
-System 2 output goes in `insights/` and uses this naming pattern:
+System 2 output goes in `deep_insights/` and uses this naming pattern:
 
 ```text
-insight_{ID}.md
+deep_insight_{ID}.md
 ```
 
 Required structure:
@@ -265,7 +265,7 @@ Before ending a research turn, verify:
 1. The response matches the user's request or the active research focus.
 2. Observation and inference are separated.
 3. Missing evidence is visible.
-4. At least one appropriate state artifact was updated: `observations/`, `my_wikipedia/`, `radar.md`, `insights/`, or Protocol Memory.
+4. At least one appropriate state artifact was updated: `quick_notes/`, `my_wikipedia/`, `radar.md`, `deep_insights/`, or Protocol Memory.
 5. Questions were not invented just to make the radar look active.
 6. Any caught reasoning drift was logged in `mistakes.md`.
 7. No em dash characters were introduced.
