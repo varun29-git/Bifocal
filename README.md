@@ -44,6 +44,7 @@ Before System 1 extracts claims, it performs a lightweight source triage: source
 |-- quick_notes/
 |-- my_wikipedia/
 |-- deep_insights/
+|-- examples/
 |-- radar.md
 |-- mistakes.md
 |-- init.sh

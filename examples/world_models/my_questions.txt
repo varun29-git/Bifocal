@@ -1,0 +1,5 @@
+# Optional: write research questions here, one per line.
+What is a world model in machine learning?
+How do world models differ across reinforcement learning, robotics, and large language model research?
+What evidence would show that a model has learned a useful predictive representation of its environment?
+What are the main limitations or failure modes of current world-model approaches?
