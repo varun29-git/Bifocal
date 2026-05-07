@@ -2,7 +2,7 @@
 
 Experimental Research Framework (V0.2-alpha)
 
-Bifocal is a small research scaffold for AI-integrated IDEs. It helps an agent turn a static folder of sources into an active research workspace with two lenses: a near lens for quick observation and a far lens for slower synthesis.
+Bifocal is a small research scaffold for AI-integrated IDEs. It helps an agent turn a static folder of sources into an evolving research memory with two lenses: a near lens for quick observation and a far lens for slower synthesis.
 
 Bifocal can use the familiar System 1 and System 2 labels, but the product idea is simpler: shift focus without losing the evidence trail.
 
@@ -13,11 +13,13 @@ The framework gives an AI agent a simple research loop:
 1. Observe incoming material quickly.
 2. Extract high-signal notes and gaps.
 3. Maintain a wiki of reusable concepts.
-4. Track user and agent questions in a shared radar.
+4. Track questions, gaps, contradictions, and synthesis candidates in a shared radar.
 5. Switch to slower synthesis only when the evidence base is ready.
 6. Produce standalone knowledge blocks with backing evidence.
 
 This structure is intended for research work where traceability matters. It keeps raw material, observations, and verified synthesis in separate places so the user can inspect how conclusions formed.
+
+Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
 ## Core Model
 
@@ -54,22 +56,23 @@ Before System 1 extracts claims, it performs a lightweight source triage: source
 2. Write questions in `user_questions.txt`, one per line.
 3. Point your AI IDE agent, such as Cursor, Windsurf, or Antigravity, to `.agent/protocol.md`.
 4. Tell the agent: "Run Bifocal."
-5. Review `research_radar.md` for active questions and synthesis readiness.
+5. Review `research_radar.md` for questions, gaps, contradictions, and synthesis readiness.
 6. Review `concept_wiki/` for reusable concepts the agent is building.
 7. Ask for Far Lens or System 2 when you want a standalone synthesis.
 
 Suggested agent instruction:
 
 ```text
-Use .agent/protocol.md as your operating protocol. Run Bifocal: read user_questions.txt, inspect source_material, update research_radar.md and concept_wiki, and only synthesize when the trigger is met or I ask for Far Lens.
+Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect source_material, read user_questions.txt as optional steering input, update processed_wiki, concept_wiki, and research_radar as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
 ```
 
 ## Operating Rules
 
 - Raw source material belongs in `source_material/`.
-- User questions belong in `user_questions.txt`.
+- Optional user questions belong in `user_questions.txt`.
 - System 1 summaries belong in `processed_wiki/`.
 - Durable concept pages belong in `concept_wiki/`.
+- Questions, gaps, contradictions, and synthesis candidates belong in `research_radar.md`.
 - System 2 synthesis files belong in `synthesis/`.
 - Every synthesis file must include a Backing Evidence section.
 - Every System 2 claim must be checked against Protocol Memory in `.agent/protocol.md`.
