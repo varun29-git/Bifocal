@@ -1,4 +1,4 @@
-# Concept Wiki
+# My Wikipedia
 
 This folder holds promoted concept pages that accumulate across sources.
 

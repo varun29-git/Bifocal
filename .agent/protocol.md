@@ -133,7 +133,7 @@ If the user provides sources but no active question, still run Near Lens:
 4. Add only the most important emergent questions, gaps, or contradictions to `radar.md`.
 5. End with one next action.
 
-## Concept Wiki
+## My Wikipedia
 
 Use `my_wikipedia/` for promoted concepts, not every concept mentioned in a source.
 

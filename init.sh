@@ -39,7 +39,7 @@ System 1 is observation. It is fast, low-latency, and useful for spotting high-s
 
 System 2 is synthesis. It is slower and evidence-backed. It compares sources, checks assumptions, and writes a standalone insight when the research focus is ready or the user asks for it.
 
-The concept wiki sits between them. Near Lens marks concept candidates in observation notes. Bifocal promotes only repeated, central, synthesis-needed, or user-requested concepts into durable wiki pages.
+`my_wikipedia/` sits between observation and synthesis. Near Lens marks concept candidates in observation notes. Bifocal promotes only repeated, central, synthesis-needed, or user-requested concepts into durable wiki pages.
 
 Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
@@ -113,6 +113,14 @@ By default, the initializer writes the framework into the current directory. You
 
 This is V0.2-alpha. It is suitable for experimentation and iteration, not for unattended high-stakes research.
 EOF_README
+
+cat > "$TARGET/.agent/README.md" <<'EOF_AGENT_README'
+# Agent Instructions
+
+This folder holds the operating protocol for the AI agent.
+
+Start with `protocol.md`. Users usually should not need to edit this folder during normal research.
+EOF_AGENT_README
 
 cat > "$TARGET/.agent/protocol.md" <<'EOF_PROTOCOL'
 # Agent Research Protocol
@@ -250,7 +258,7 @@ If the user provides sources but no active question, still run Near Lens:
 4. Add only the most important emergent questions, gaps, or contradictions to `radar.md`.
 5. End with one next action.
 
-## Concept Wiki
+## My Wikipedia
 
 Use `my_wikipedia/` for promoted concepts, not every concept mentioned in a source.
 
@@ -396,8 +404,24 @@ if [ ! -f "$TARGET/questions.txt" ]; then
 EOF_QUESTIONS
 fi
 
+cat > "$TARGET/sources/README.md" <<'EOF_SOURCES_README'
+# Sources
+
+Put raw material here: PDFs, notes, transcripts, articles, copied text, exports, and links saved as text.
+
+The agent reads this folder first, triages source quality, and turns useful signals into observations.
+EOF_SOURCES_README
+
+cat > "$TARGET/observations/README.md" <<'EOF_OBSERVATIONS_README'
+# Observations
+
+This folder holds short Near Lens notes from individual sources.
+
+Use it for useful signals, caveats, contradictions, and concept candidates. Do not treat these notes as final conclusions.
+EOF_OBSERVATIONS_README
+
 cat > "$TARGET/my_wikipedia/README.md" <<'EOF_CONCEPT_WIKI'
-# Concept Wiki
+# My Wikipedia
 
 This folder holds promoted concept pages that accumulate across sources.
 
@@ -405,6 +429,14 @@ Do not create a page for every mentioned term. Promote a concept here only when 
 
 Use one short markdown file per promoted concept. Keep pages brief, sourced, and easy to revise.
 EOF_CONCEPT_WIKI
+
+cat > "$TARGET/insights/README.md" <<'EOF_INSIGHTS_README'
+# Insights
+
+This folder holds Far Lens synthesis files.
+
+Use it for slower, evidence-backed outputs that compare sources, check assumptions, and state limits.
+EOF_INSIGHTS_README
 
 cat > "$TARGET/radar.md" <<'EOF_RADAR'
 # Research Radar
