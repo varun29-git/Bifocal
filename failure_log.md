@@ -5,5 +5,5 @@ Append one line when the agent catches substitution, anchoring, WYSIATI, or rela
 Template:
 
 ```markdown
-- Date: YYYY-MM-DD | Question: {question} | Failure Mode: {mode} | What Changed: {correction}
+- Date: YYYY-MM-DD | Focus: {question, concept, claim, or synthesis} | Failure Mode: {mode} | What Changed: {correction}
 ```
