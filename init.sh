@@ -39,7 +39,7 @@ System 1 is observation. It is fast, low-latency, and useful for spotting high-s
 
 System 2 is synthesis. It is slower and evidence-backed. It compares sources, checks assumptions, and writes a standalone synthesis when the research focus is ready or the user asks for it.
 
-The concept wiki sits between them. System 1 can create or update a concept page when a source clarifies a reusable idea. System 2 can refine those pages after synthesis.
+The concept wiki sits between them. Near Lens marks concept candidates in observation notes. Bifocal promotes only repeated, central, synthesis-needed, or user-requested concepts into durable wiki pages.
 
 Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
@@ -196,7 +196,7 @@ Use it for quick observation:
 
 1. Read or skim incoming source material.
 2. Write a short note in `processed_wiki/` only when the material contains a useful signal.
-3. Add or update a concept page in `concept_wiki/` when the material clarifies a reusable idea.
+3. Mark concept candidates in the observation note when the material clarifies a reusable idea.
 4. Add or update `research_radar.md` when the signal creates a question, gap, contradiction, or synthesis candidate.
 
 System 1 notes should be brief.
@@ -212,6 +212,10 @@ Date:
 ## Signal
 
 ## Open Question
+
+Concept Candidates:
+
+- {candidate concept}
 
 ## Caveat
 ```
@@ -242,13 +246,24 @@ If the user provides sources but no active question, still run Near Lens:
 
 1. Triage new sources.
 2. Write useful observations.
-3. Create or update concept pages.
+3. Mark concept candidates in observation notes.
 4. Add only the most important emergent questions, gaps, or contradictions to `research_radar.md`.
 5. End with one next action.
 
 ## Concept Wiki
 
-Use `concept_wiki/` for stable, reusable concepts that appear across sources or help explain the research area.
+Use `concept_wiki/` for promoted concepts, not every concept mentioned in a source.
+
+Do not create a concept page just because a source mentions or defines a term. During Near Lens, mark possible concepts in `processed_wiki/` observation notes using `Concept Candidates`.
+
+Promote a candidate to `concept_wiki/` only when one condition is true:
+
+1. It appears in 2 or more independent sources.
+2. It is central to a user question or active radar item.
+3. It is needed to understand a Far Lens synthesis.
+4. The user explicitly asks for a concept page.
+
+Create at most 3 new concept pages per research turn unless the user asks otherwise.
 
 Create one markdown file per concept using a short lowercase filename:
 
@@ -299,7 +314,7 @@ Before writing the synthesis, check:
 4. What assumptions are doing work?
 5. What would weaken or falsify the answer?
 6. Does the answer conflict with Protocol Memory?
-7. Which concept pages should be created or updated?
+7. Which concept candidates should be promoted, or which existing concept pages should be updated?
 
 System 2 output goes in `synthesis/` and uses this naming pattern:
 
@@ -384,9 +399,11 @@ fi
 cat > "$TARGET/concept_wiki/README.md" <<'EOF_CONCEPT_WIKI'
 # Concept Wiki
 
-This folder holds durable concept pages that accumulate across sources.
+This folder holds promoted concept pages that accumulate across sources.
 
-Use one short markdown file per concept. Keep pages brief, sourced, and easy to revise.
+Do not create a page for every mentioned term. Promote a concept here only when it repeats across independent sources, is central to an active focus, is needed for synthesis, or the user asks for it.
+
+Use one short markdown file per promoted concept. Keep pages brief, sourced, and easy to revise.
 EOF_CONCEPT_WIKI
 
 cat > "$TARGET/research_radar.md" <<'EOF_RADAR'
