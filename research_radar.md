@@ -1,17 +1,19 @@
 # Research Radar
 
-This file tracks active questions and completed synthesis.
+This file is Bifocal's attention layer.
 
-Keep entries short. The radar should help the agent decide what to do next, not become a second notebook.
+Keep entries short. The radar should show what deserves attention next. It is not the whole research system and it should not replace `processed_wiki/`, `concept_wiki/`, or `synthesis/`.
 
-Use User Questions for objectives the researcher explicitly asked for. Use AI Generated Questions for gaps the agent found while observing sources.
+Use it for user questions, emergent questions, gaps, contradictions, concept clusters, and synthesis candidates.
 
 ## User Questions
+
+Questions the researcher explicitly wrote in `user_questions.txt` or asked in conversation.
 
 ```markdown
 ### Q-{ID}: {Question}
 
-Status: Open | Ready for System 2 | Synthesized | Under Review
+Status: Open | Ready for Far Lens | Synthesized | Under Review
 
 Evidence:
 
@@ -22,12 +24,17 @@ Evidence:
 Notes:
 ```
 
-## AI Generated Questions
+## Emergent Attention Items
+
+Important things the agent noticed while reading sources.
 
 ```markdown
-### AQ-{ID}: {Question}
+### A-{ID}: {Short title}
 
-Status: Open | Ready for System 2 | Synthesized | Under Review
+Type: Question | Gap | Contradiction | Concept Cluster | Synthesis Candidate
+Status: Open | Ready for Far Lens | Synthesized | Under Review
+
+Why It Matters:
 
 Evidence:
 
@@ -35,15 +42,15 @@ Evidence:
   Date:
   Adds:
 
-Notes:
+Next Action:
 ```
 
 ## Synthesis Ledger
 
 ```markdown
-| Insight ID | File | Source Question | Status |
+| Insight ID | File | Source Focus | Status |
 | --- | --- | --- | --- |
-| example | synthesis/insight_example.md | Q-001 | Under Review |
+| example | synthesis/insight_example.md | A-001 | Under Review |
 ```
 
 Status values:
