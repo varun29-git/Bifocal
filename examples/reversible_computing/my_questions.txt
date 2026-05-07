@@ -1,0 +1,8 @@
+# Optional: write research questions here, one per line.
+
+What is reversible computing?
+Why does reversibility matter for the thermodynamic cost of computation?
+What is Landauer's principle, and what does it actually imply?
+How are reversible logic, adiabatic computing, and quantum computing related?
+What are the main practical barriers to building useful reversible computers?
+Which claims about reversible computing are established, and which are speculative?
