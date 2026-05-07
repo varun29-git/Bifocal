@@ -138,6 +138,14 @@ Reason:
 
 System 1 is the default mode.
 
+Before extracting claims from each source, triage it:
+
+1. What kind of source is this: primary research, review, commentary, journalism, or informal?
+2. Is there a clear author and institutional context?
+3. Does the claim in this source depend on evidence inside the document, or does it just assert?
+
+Use the triage to decide how much trust and attention the source deserves.
+
 Use it for quick observation:
 
 1. Read or skim incoming source material.
