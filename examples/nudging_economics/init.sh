@@ -9,7 +9,7 @@ rm -f "$TARGET/.agent/project_memory.md"
 cat > "$TARGET/README.md" <<'EOF_README'
 # Bifocal Research Autonomy Framework
 
-Experimental Research Framework (V0.2-alpha)
+Bifocal Research Autonomy Framework
 
 Bifocal is a small research scaffold for AI-integrated IDEs. It helps an agent turn a static folder of sources into an evolving research memory without turning the first coherent summary into a conclusion.
 
@@ -114,7 +114,7 @@ By default, the initializer writes the framework into the current directory. You
 
 ## Status
 
-This is V0.2-alpha. It is suitable for experimentation and iteration, not for unattended high-stakes research.
+Bifocal is suitable for experimentation and iteration, not for unattended high-stakes research.
 EOF_README
 
 cat > "$TARGET/.agent/README.md" <<'EOF_AGENT_README'

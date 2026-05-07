@@ -229,6 +229,6 @@ The initializer creates the scaffold and protocol files. It does not overwrite a
 
 ## Status
 
-Bifocal is V0.2-alpha. It is ready to ship as an experimental framework for AI-assisted research workflows.
+Bifocal is ready to ship as a practical framework for AI-assisted research workflows.
 
 It is not a substitute for expert review. It should not be used unattended for high-stakes medical, legal, financial, or safety-critical research.

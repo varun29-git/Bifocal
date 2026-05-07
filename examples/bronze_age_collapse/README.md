@@ -1,6 +1,6 @@
 # Bifocal Research Autonomy Framework
 
-Experimental Research Framework (V0.2-alpha)
+Bifocal Research Autonomy Framework
 
 Example focus: the Late Bronze Age collapse.
 
@@ -109,4 +109,4 @@ By default, the initializer writes the framework into the current directory. You
 
 ## Status
 
-This is V0.2-alpha. It is suitable for experimentation and iteration, not for unattended high-stakes research.
+Bifocal is suitable for experimentation and iteration, not for unattended high-stakes research.
