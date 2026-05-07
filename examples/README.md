@@ -6,10 +6,12 @@ Use it to show how `sources/`, `quick_notes/`, `my_wikipedia/`, `radar.md`, and 
 
 ## Available Examples
 
-- `world_models/`: tested on AI world-model and Dreamer papers. Shows definition synthesis, research-line synthesis, and an honest open gap for LLM-specific claims.
-- `nudging_economics/`: tested on behavioral-policy definition, ethics, meta-analysis, and publication-bias sources. Shows contradiction handling and evidence uncertainty.
-- `bronze_age_collapse/`: tested on archaeology and paleoclimate sources. Shows multi-cause synthesis, sequence versus event handling, and cautious treatment of Sea Peoples claims.
-- `reversible_computing/`: tested on stochastic thermodynamics, CMOS invertible logic, and quasi-static analog DNN theory. Shows separation between logical reversibility, invertible logic, and thermodynamic reversibility.
+| Example | Domain | What It Shows |
+| --- | --- | --- |
+| `world_models/` | AI research | Definition synthesis, research-line synthesis, and an honest open gap for LLM-specific claims |
+| `nudging_economics/` | Behavioral policy | Contradiction handling, ethics, meta-analysis, and evidence uncertainty |
+| `bronze_age_collapse/` | Archaeology and paleoclimate | Multi-cause synthesis, sequence versus event handling, and cautious treatment of Sea Peoples claims |
+| `reversible_computing/` | Computing and thermodynamics | Separation between logical reversibility, invertible logic, and thermodynamic reversibility |
 
 ## How To Read An Example
 
