@@ -11,7 +11,7 @@ cat > "$TARGET/README.md" <<'EOF_README'
 
 Experimental Research Framework (V0.2-alpha)
 
-Bifocal is a small research scaffold for AI-integrated IDEs. It separates quick observation from slower synthesis so an agent can work with sources without turning the first coherent summary into a conclusion.
+Bifocal is a small research scaffold for AI-integrated IDEs. It helps an agent turn a static folder of sources into an evolving research memory without turning the first coherent summary into a conclusion.
 
 Bifocal has two lenses:
 
@@ -23,11 +23,11 @@ The framework can use System 1 and System 2 as familiar labels, but the product 
 ## What It Provides
 
 - `source_material/` for raw inputs.
-- `user_questions.txt` for plain-language questions from the user.
+- `user_questions.txt` for optional plain-language questions from the user.
 - `processed_wiki/` for short System 1 observations.
 - `concept_wiki/` for durable concept pages that accumulate across sources.
 - `synthesis/` for System 2 knowledge blocks.
-- `research_radar.md` for active questions and synthesis status.
+- `research_radar.md` for questions, gaps, contradictions, concept clusters, and synthesis candidates.
 - `failure_log.md` for one-line records of caught reasoning drift.
 - `.agent/protocol.md` for operating instructions and project memory.
 
@@ -37,9 +37,11 @@ The structure is intentionally light. It asks the agent to do a few things consi
 
 System 1 is observation. It is fast, low-latency, and useful for spotting high-signal facts, gaps, contradictions, and possible questions.
 
-System 2 is synthesis. It is slower and evidence-backed. It compares sources, checks assumptions, and writes a standalone answer only when the question is ready or the user asks for it.
+System 2 is synthesis. It is slower and evidence-backed. It compares sources, checks assumptions, and writes a standalone synthesis when the research focus is ready or the user asks for it.
 
 The concept wiki sits between them. System 1 can create or update a concept page when a source clarifies a reusable idea. System 2 can refine those pages after synthesis.
+
+Questions are part of the ecosystem, not the whole ecosystem. They steer attention, but Bifocal can still ingest sources, build concepts, notice contradictions, and suggest next actions before the user knows exactly what to ask.
 
 Every important claim should still be broken down from first principles:
 
@@ -69,22 +71,22 @@ Every important claim should still be broken down from first principles:
 ## How to Use
 
 1. Put sources in `source_material/`.
-2. Write your questions in `user_questions.txt`, one per line.
+2. Optionally write questions in `user_questions.txt`, one per line.
 3. Tell the agent: "Run Bifocal."
-4. Read `research_radar.md` for active questions and synthesis readiness.
+4. Read `research_radar.md` for questions, gaps, contradictions, and synthesis readiness.
 5. Read `concept_wiki/` for reusable concepts the agent is building.
 6. Ask for Far Lens or System 2 when you want a standalone synthesis.
 
 Suggested IDE instruction:
 
 ```text
-Use .agent/protocol.md as your operating protocol. Run Bifocal: read user_questions.txt, inspect source_material, update research_radar.md and concept_wiki, and only synthesize when the trigger is met or I ask for Far Lens.
+Use .agent/protocol.md as your operating protocol. Run Bifocal: inspect source_material, read user_questions.txt as optional steering input, update processed_wiki, concept_wiki, and research_radar as appropriate, and only synthesize when the focus is ready or I ask for Far Lens.
 ```
 
 ## Design Principles
 
 - Keep raw inputs, observations, and conclusions separate.
-- Keep user input simple: questions go in `user_questions.txt`.
+- Keep user input simple: optional questions go in `user_questions.txt`.
 - Keep reusable concepts in `concept_wiki/`.
 - Prefer short useful notes over elaborate compliance.
 - Treat source count as a readiness signal, not proof.
@@ -134,14 +136,29 @@ The System 1 and System 2 labels are practical shorthand, not claims about agent
 - Maintain `concept_wiki/` as the durable wiki of reusable concepts.
 - Keep bookkeeping light enough to follow across turns.
 
+## Knowledge Ecosystem
+
+Bifocal is not a question-answering workflow. It is a small research ecosystem.
+
+Maintain these layers:
+
+1. `source_material/` holds raw inputs.
+2. `processed_wiki/` holds short observations from individual sources.
+3. `concept_wiki/` holds reusable concepts that accumulate across sources.
+4. `research_radar.md` holds attention items: user questions, emergent questions, gaps, contradictions, and synthesis candidates.
+5. `synthesis/` holds Far Lens outputs.
+6. Protocol Memory holds durable axioms only after synthesis.
+
+Questions are steering signals. They help direct attention, but they are not the only reason to read, organize, synthesize, or update memory.
+
 ## Start Here
 
 At the start of each research turn:
 
 1. Read `user_questions.txt`, ignoring blank lines and lines that start with `#`.
-2. Promote any new user questions into `research_radar.md`.
+2. Add any new user questions to `research_radar.md` as attention items.
 3. Inspect `source_material/` for new or changed sources.
-4. Use Near Lens unless the user explicitly asks for Far Lens or System 2.
+4. Use Near Lens unless the user explicitly asks for Far Lens or a source cluster is ready for synthesis.
 
 ## Protocol Memory
 
@@ -180,7 +197,7 @@ Use it for quick observation:
 1. Read or skim incoming source material.
 2. Write a short note in `processed_wiki/` only when the material contains a useful signal.
 3. Add or update a concept page in `concept_wiki/` when the material clarifies a reusable idea.
-4. Add or update a question in `research_radar.md` when the signal affects an active research direction.
+4. Add or update `research_radar.md` when the signal creates a question, gap, contradiction, or synthesis candidate.
 
 System 1 notes should be brief.
 
@@ -201,13 +218,13 @@ Date:
 
 Do not force every source into the template if a one-line radar update is enough.
 
-## Radar Check
+## Attention Radar
 
-Use `research_radar.md` as the active question list.
+Use `research_radar.md` as the active attention layer, not as the whole research system.
 
 Use `user_questions.txt` as the user's simple question inbox. Ignore blank lines and lines that start with `#`. Do not make the user edit radar syntax directly. When a question in `user_questions.txt` is not already represented in the radar, add it under User Questions.
 
-For each useful source, add one short evidence tag under the most relevant question:
+For each useful source, add one short evidence tag under the most relevant attention item:
 
 ```markdown
 - Source: {file or source name}
@@ -215,9 +232,19 @@ For each useful source, add one short evidence tag under the most relevant quest
   Adds: {one sentence explaining what this source adds that the others do not}
 ```
 
-If no question matches, add a new question only when it points to a real gap.
+If no attention item matches, add one only when the source creates a real question, gap, contradiction, concept cluster, or synthesis candidate.
 
-If the agent has not updated `research_radar.md` in the current research turn, the turn is not complete.
+If a turn only updates observations or concept pages, the radar does not need a forced update. Do not invent questions just to satisfy bookkeeping.
+
+## Exploration Mode
+
+If the user provides sources but no active question, still run Near Lens:
+
+1. Triage new sources.
+2. Write useful observations.
+3. Create or update concept pages.
+4. Add only the most important emergent questions, gaps, or contradictions to `research_radar.md`.
+5. End with one next action.
 
 ## Concept Wiki
 
@@ -252,12 +279,13 @@ Keep concept pages short. They are living wiki pages, not final syntheses.
 
 ## Transition Trigger
 
-Switch to System 2 when either condition is true:
+Switch to Far Lens, also called System 2, when either condition is true:
 
-1. A question has 3 or more evidence tags with distinct Adds lines.
-2. The user explicitly asks for System 2.
+1. A research focus has 3 or more evidence tags with distinct Adds lines.
+2. A concept, contradiction, or claim cluster needs consolidation.
+3. The user explicitly asks for Far Lens or System 2.
 
-Distinct Adds lines are a readiness signal. Confirm source independence during synthesis.
+Distinct Adds lines are a readiness signal, not proof. Confirm source quality and independence during synthesis.
 
 ## System 2
 
@@ -265,7 +293,7 @@ System 2 is deliberate synthesis.
 
 Before writing the synthesis, check:
 
-1. What question is being answered?
+1. What focus is being synthesized: question, concept, contradiction, claim cluster, or decision?
 2. Which sources actually bear on it?
 3. What does each source add that the others do not?
 4. What assumptions are doing work?
@@ -286,9 +314,9 @@ Required structure:
 
 Status: Stable | Under Review
 
-## Question
+## Focus
 
-## Short Answer
+## Synthesis
 
 ## Backing Evidence
 
@@ -329,18 +357,18 @@ Append to `failure_log.md` when the agent catches itself doing substitution, anc
 Use one line:
 
 ```markdown
-- Date: {YYYY-MM-DD} | Question: {question} | Failure Mode: {mode} | What Changed: {correction}
+- Date: {YYYY-MM-DD} | Focus: {question, concept, claim, or synthesis} | Failure Mode: {mode} | What Changed: {correction}
 ```
 
 ## End-of-Turn Check
 
 Before ending a research turn, verify:
 
-1. The answer matches the user's actual question.
+1. The response matches the user's request or the active research focus.
 2. Observation and inference are separated.
 3. Missing evidence is visible.
-4. `research_radar.md` was updated in this turn.
-5. `concept_wiki/` was updated when reusable concepts changed.
+4. At least one appropriate state artifact was updated: `processed_wiki/`, `concept_wiki/`, `research_radar.md`, `synthesis/`, or Protocol Memory.
+5. Questions were not invented just to make the radar look active.
 6. Any caught reasoning drift was logged in `failure_log.md`.
 7. No em dash characters were introduced.
 EOF_PROTOCOL
