@@ -53,7 +53,7 @@ Before System 1 extracts claims, it performs a lightweight source triage: source
 ## How to Use
 
 1. Put sources in `source_material/`.
-2. Write questions in `user_questions.txt`, one per line.
+2. Optionally write questions in `user_questions.txt`, one per line.
 3. Point your AI IDE agent, such as Cursor, Windsurf, or Antigravity, to `.agent/protocol.md`.
 4. Tell the agent: "Run Bifocal."
 5. Review `research_radar.md` for questions, gaps, contradictions, and synthesis readiness.
