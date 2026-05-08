@@ -1,3 +1,5 @@
+![Bifocal Research Autonomy Framework](assets/bifocal_github_banner.svg)
+
 # Bifocal
 
 An agentic research framework inspired by Kahneman's fast and slow thinking.
