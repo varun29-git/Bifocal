@@ -11,7 +11,7 @@ Bifocal gives an AI agent a pair of research lenses: one for fast observation, o
 | Near Lens | Fast | Triage, observe, note signals, find gaps | `quick_notes/`, `radar.md` |
 | Far Lens | Slow | Compare sources, test assumptions, synthesize | `deep_insights/`, `my_wikipedia/` |
 
-> Bifocal uses System 1 and System 2 as useful labels. It does not claim AI literally thinks like a human. The goal is practical: do not let the first coherent answer become the final answer.
+
 
 ## Start Here
 
